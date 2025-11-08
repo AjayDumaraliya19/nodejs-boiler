@@ -1,6 +1,6 @@
 {
   "name": "nodejs-boiler",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A fast and modern Node.js project boilerplate generator CLI that instantly sets up a ready-to-use Express app with folder structure, authentication, error handling, and reusable utilities.",
   "type": "module",
   "main": "src/index.js",
