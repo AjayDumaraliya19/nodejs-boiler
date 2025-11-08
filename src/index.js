@@ -161,20 +161,9 @@ async function main() {
             /** == Common Scripts == */
             pkg.scripts.start = "node src/index.js";
             pkg.scripts.dev = "nodemon src/index.js";
-            pkg.scripts.lint = "eslint src --fix";
-            pkg.scripts.test = "jest";
-            pkg.scripts["test:watch"] = "jest --watch";
-            pkg.scripts["test:coverage"] = "jest --coverage";
 
             /** == Add ESLint + Jest == */
-            Object.assign(pkg.devDependencies, {
-                "eslint": "^8.0.0",
-                "prettier": "^3.0.0",
-                "eslint-config-prettier": "^8.8.0",
-                "eslint-plugin-prettier": "^4.2.1",
-                "jest": "^29.0.0",
-                "supertest": "^6.3.3"
-            });
+            Object.assign(pkg.devDependencies, { "nodemon": "^3.1.10" });
 
             await fs.writeJson(packageJsonPath, pkg, { spaces: 2 });
         }
@@ -193,7 +182,7 @@ async function main() {
 
         /** == Show .env setup instructions f needed == */
         console.log(`\n${chalk.yellow.bold("Setup .env file:")} Create a .env file in the project root with these variables:`);
-        console.log(chalk.gray(`PORT=3000\nNODE_ENV=development\nMONGODB_URI=your_mongodb_connection_string\nJWT_SECRET=your_jwt_secret_key`));
+        console.log(chalk.gray(`PORT = 8080\nNODE_ENV = "development"\n\nREQUEST_BODY_LIMIT = "50mb"\n\nMONGODB_URL = "mongodb://localhost:27017"\nMONGODB_DB = "nodejs_boiler"\n\nJWT_SECRET = "your_secret_key"\nJWT_EXPIRES_IN = "1d"\nJWT_COOKIE_EXPIRES_IN = 90\n\nCORS_ORIGIN = "http://localhost:8080","http://localhost:3000"\n\nRATE_LIMIT_WINDOW_MS = 900000\nRATE_LIMIT_MAX = 100\n\nEMAIL_PASS = "xxxx xxxx xxxx xxxx"\nSENDER_USER = "your_email@example.com"`));
         console.log(chalk.green("\nHappy coding! 🎉\n"));
     } catch (error) {
         console.error(chalk.red("\nError:"), error?.message || "");
