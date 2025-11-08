@@ -176,6 +176,7 @@ async function main() {
         const nextSteps = [
             `cd ${path.relative(process.cwd(), targetDir) || "."}`,
             `npm install`,
+            `npm init:admin   # (optional) to create an admin user`,
             `npm run dev`
         ];
         nextSteps.forEach((step, index) => console.log(chalk.cyan(`  ${index + 1}. ${step}`)));

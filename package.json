@@ -5,7 +5,8 @@
   "type": "module",
   "main": "src/index.js",
   "bin": {
-    "nodejs-boiler": "./src/index.js"
+    "nodejs-boiler": "./src/index.js",
+    "create-nodejs-boiler": "./src/index.js"
   },
   "scripts": {
     "start": "node ./src/index.js",
