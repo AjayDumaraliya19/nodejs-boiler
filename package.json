@@ -14,7 +14,7 @@
   },
   "author": {
     "name": "Ajay Dumaraliya",
-    "url": "https://github.com/AjayDumaraliya19/nodejs-boiler_"
+    "url": "https://github.com/AjayDumaraliya19/nodejs-boiler"
   },
   "license": "MIT",
   "keywords": [
@@ -42,13 +42,13 @@
     "mySQL",
     "PostgreSQL"
   ],
-  "homepage": "https://github.com/AjayDumaraliya19/nodejs-boiler_#readme",
+  "homepage": "https://github.com/AjayDumaraliya19/nodejs-boiler#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AjayDumaraliya19/nodejs-boiler_.git"
+    "url": "git+https://github.com/AjayDumaraliya19/nodejs-boiler.git"
   },
   "bugs": {
-    "url": "https://github.com/AjayDumaraliya19/nodejs-boiler_/issues"
+    "url": "https://github.com/AjayDumaraliya19/nodejs-boiler/issues"
   },
   "dependencies": {
     "chalk": "^5.6.2",
