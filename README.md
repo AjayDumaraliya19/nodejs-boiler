@@ -83,7 +83,8 @@ Choose one of the following methods:
 ```bash
 # Create a new project
 npx create-nodejs-boiler my-awesome-app
-or
+
+# Or
 npm create nodejs-boiler my-awesome-app
 
 # Navigate to project directory
@@ -106,6 +107,9 @@ cd my-awesome-app
 
 # Install dependencies
 npm install
+
+# add admin create
+npm run init:admin
 ```
 
 ### Step 3: Verify Installation
@@ -208,7 +212,12 @@ const connectDB = async () => {
 export default connectDB;
 ```
 
-### 3. Start the Application
+### 3. Insert Default Admin data
+```bash
+npm run init:admin
+```
+
+### 4. Start the Application
 
 #### Development Mode (with hot-reload)
 ```bash
@@ -221,7 +230,7 @@ npm run dev
 npm start
 ```
 
-### 4. Verify the Connection
+### 5. Verify the Connection
 1. Check the console for successful MongoDB connection message
 2. Check the Api working Visit `http://localhost:8080/`
 3. Visit `http://localhost:8080/health` for API health status
@@ -247,6 +256,9 @@ This project uses Mongoose to interact with MongoDB. The database connection is 
 # Using npx (recommended)
 npx nodejs-boiler@latest my-awesome-app
 
+# Or
+npm create nodejs-boiler@latest my-awesome-app
+
 # Or install globally
 npm install -g nodejs-boiler
 nodejs-boiler my-awesome-app
@@ -259,6 +271,9 @@ npm install
 
 # Set up environment variables
 cp .env.example .env
+
+# Add first admin data
+npm run init:admin
 
 # Start development server
 npm run dev
@@ -321,7 +336,13 @@ npm run dev
 ```
 project-root/
 ├── docs/
-│   ├── swagger.json/             # All apis swagger json files
+│   └── swagger.json              # All apis swagger json files
+|
+├── logs/                         # Documentation Folder
+|
+├── scripts/                      # Scripts Folder
+│  └── initAdmin.js               # initial Admin Data create file
+|
 ├── src/
 │   ├── configs/                  # Configuration files
 │   │   └── envConfig.js          # Application configurations
@@ -366,105 +387,9 @@ project-root/
 └── README.md                     # Project documentation
 ```
 
-## Available Scripts 📜
-
-### Development
-- `npm run dev` - Start development server with hot-reload
-- `npm run lint` - Lint and fix code
-- `npm run format` - Format code with Prettier
-
-### Testing
-- `npm test` - Run all tests
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:coverage` - Generate test coverage report
-- `npm run test:e2e` - Run end-to-end tests
-
-### Production
-- `npm start` - Start production server
-- `npm run build` - Build the application
-- `npm run migrate` - Run database migrations
-- `npm run seed` - Seed the database
-
-### Docker
-- `docker-compose up` - Start all services (app + database)
-- `docker-compose down` - Stop all services
-- `docker-compose build` - Rebuild containers
-
-## Environment Variables 🔧
-
-Copy `.env.example` to `.env` and update the following variables:
-
-```env
-# Application
-NODE_ENV=development
-PORT=3000
-JWT_SECRET=your_jwt_secret_key
-JWT_EXPIRES_IN=90d
-
-# Database (MongoDB)
-DB_TYPE=mongodb
-MONGODB_URI=mongodb://localhost:27017/your_database
-MONGODB_OPTIONS={"useNewUrlParser":true,"useUnifiedTopology":true}
-
-# Database (SQL - Choose one)
-# DB_TYPE=postgres
-# DB_HOST=localhost
-# DB_PORT=5432
-# DB_NAME=your_database
-# DB_USER=your_username
-# DB_PASSWORD=your_password
-
-# Logging
-LOG_LEVEL=info
-
-# CORS
-CORS_ORIGIN=http://localhost:3000
-
-# Rate Limiting
-RATE_LIMIT_WINDOW_MS=15*60*1000
-RATE_LIMIT_MAX=100
-```
-
-## API Documentation 📚
-
-Once the server is running, access the API documentation at:
-- Swagger UI: `http://localhost:3000/api-docs`
-- OpenAPI JSON: `http://localhost:3000/api-docs.json`
-
-## Deployment 🚀
-
-### Docker Deployment
-
-1. Build the Docker image:
-   ```bash
-   docker build -t nodejs-boiler .
-   ```
-
-2. Run the container:
-   ```bash
-   docker run -p 3000:3000 --env-file .env nodejs-boiler
-   ```
-
-### PM2 (Production)
-
-```bash
-# Install PM2 globally
-npm install -g pm2
-
-# Start application
-pm2 start src/server.js --name "nodejs-boiler"
-
-# Save process list
-pm2 save
-
-# Generate startup script
-pm2 startup
-```
-
 ## Best Practices ✅
 
 ### Code Style
-- Follow the included ESLint and Prettier configurations
 - Write meaningful commit messages
 - Document your code with JSDoc
 
@@ -507,11 +432,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support 💖
 
-If you find this project helpful, please consider giving it a ⭐️ on [GitHub](https://github.com/AjayDumaraliya19/nodejs-boiler_) and sharing it with your network!
+If you find this project helpful, please consider giving it a ⭐️ on [GitHub](https://github.com/AjayDumaraliya19/nodejs-boiler) and sharing it with your network!
 
 ## Acknowledgments
 - [Express.js](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/) / [Mongoose](https://mongoosejs.com/)
-- [Sequelize](https://sequelize.org/)
 - [JWT](https://jwt.io/)
-- [Jest](https://jestjs.io/)
