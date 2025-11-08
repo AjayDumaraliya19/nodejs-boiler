@@ -1,12 +1,11 @@
 {
-  "name": "create-nodejs-boiler",
+  "name": "nodejs-boiler",
   "version": "1.0.3",
   "description": "A fast and modern Node.js project boilerplate generator CLI that instantly sets up a ready-to-use Express app with folder structure, authentication, error handling, and reusable utilities.",
   "type": "module",
   "main": "src/index.js",
   "bin": {
-    "nodejs-boiler": "./src/index.js",
-    "create-nodejs-boiler": "./src/index.js"
+    "nodejs-boiler": "./src/index.js"
   },
   "scripts": {
     "start": "node src/index.js",

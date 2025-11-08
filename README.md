@@ -82,10 +82,7 @@ Choose one of the following methods:
 #### Method 1: Using npx (Recommended)
 ```bash
 # Create a new project
-npx create-nodejs-boiler my-awesome-app
-
-# Or
-npm create nodejs-boiler my-awesome-app
+npx nodejs-boiler my-awesome-app
 
 # Navigate to project directory
 cd my-awesome-app
@@ -255,9 +252,6 @@ This project uses Mongoose to interact with MongoDB. The database connection is 
 ```bash
 # Using npx (recommended)
 npx nodejs-boiler@latest my-awesome-app
-
-# Or
-npm create nodejs-boiler@latest my-awesome-app
 
 # Or install globally
 npm install -g nodejs-boiler
