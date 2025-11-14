@@ -11,8 +11,14 @@ const Joi = require("joi");
  * @property {string} NODE_ENV - The environment mode (development or production)
  * @property {number} PORT - The port number for the server
  * @property {string} REQUEST_BODY_LIMIT - The maximum size of the request body
- * @property {string} MONGODB_URL - The MongoDB connection URL
- * @property {string} MONGODB_DB - The MongoDB database name
+ * @property {string} CONNECTION_HOST - The Postgres connection host
+ * @property {number} CONNECTION_PORT - The Postgres connection port
+ * @property {string} CONNECTION_USER - The Postgres connection user
+ * @property {string} CONNECTION_DB - The Postgres database name
+ * @property {string} CONNECTION_PASSWORD - The Postgres connection password
+ * @property {number} CONNECTION_MAX - The maximum number of DB connections
+ * @property {number} CONNECTION_IDLE_TIMEOUT - Idle connection timeout in ms
+ * @property {number} CONNECTION_CONN_TIMEOUT - Connection timeout in ms
  * @property {string} JWT_SECRET - The JWT secret key
  * @property {string} JWT_EXPIRES_IN - The JWT expiration time
  * @property {number} JWT_COOKIE_EXPIRES_IN - The JWT cookie expiration time
@@ -27,8 +33,14 @@ const envVarsSchema = Joi.object({
     PORT: Joi.number().integer().default(8080).required(),
     REQUEST_BODY_LIMIT: Joi.string().trim().optional(),
 
-    MONGODB_URL: Joi.string().trim().required(),
-    MONGODB_DB: Joi.string().trim().required(),
+    CONNECTION_HOST: Joi.string().trim().required(),
+    CONNECTION_PORT: Joi.number().integer().required(),
+    CONNECTION_USER: Joi.string().trim().required(),
+    CONNECTION_DB: Joi.string().trim().required(),
+    CONNECTION_PASSWORD: Joi.string().trim().required(),
+    CONNECTION_MAX: Joi.number().integer().required(),
+    CONNECTION_IDEL_ITMEOUT: Joi.number().integer().required(),
+    CONNECTION_CONN_TIMEOUT: Joi.number().integer().required(),
 
     JWT_SECRET: Joi.string().trim().required(),
     JWT_EXPIRES_IN: Joi.string().trim().required(),
@@ -43,6 +55,7 @@ const envVarsSchema = Joi.object({
     SENDER_USER: Joi.string().trim().required()
 }).unknown();
 
+
 /* -------------------------------------------------------------------------- */
 /*                        VALIDATE AND LOAD ENV CONFIG                        */
 /* -------------------------------------------------------------------------- */
@@ -55,7 +68,8 @@ const envVarsSchema = Joi.object({
 const { error, value: envVars } = envVarsSchema.prefs({ errors: { label: "key" } }).validate(process.env);
 if (error) {
     throw new Error(`Config validation error: ${error.message}`);
-}
+};
+
 
 /* -------------------------------------------------------------------------- */
 /*                               EXPORT SETTINGS                              */
@@ -69,13 +83,19 @@ exports.config = {
     env: envVars.NODE_ENV,
     port: envVars.PORT,
     limit: envVars.REQUEST_BODY_LIMIT,
-    mongo: {
-        url: envVars.MONGODB_URL,
-        db: envVars.MONGODB_DB,
+    sql: {
+        host: envVars.CONNECTION_HOST,
+        port: envVars.CONNECTION_PORT,
+        user: envVars.CONNECTION_USER,
+        db: envVars.CONNECTION_DB,
+        password: envVars.CONNECTION_PASSWORD,
+        max: envVars.CONNECTION_MAX,
+        idletime: envVars.CONNECTION_IDEL_ITMEOUT,
+        conntime: envVars.CONNECTION_CONN_TIMEOUT
     },
     jwt: {
         secret: envVars.JWT_SECRET,
-        expires: envVars.JWT_EXPIRES,
+        expires: envVars.JWT_EXPIRES_IN,
         cookie: envVars.JWT_COOKIE_EXPIRES_IN
     },
     cors: {

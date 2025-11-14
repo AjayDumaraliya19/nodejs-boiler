@@ -3,7 +3,7 @@
     "info": {
         "title": "User Management API",
         "version": "1.0.0",
-        "description": "Comprehensive API documentation for the User Management System. This API provides endpoints for user authentication, profile management, and administrative functions."
+        "description": "API documentation for User Management System"
     },
     "servers": [
         {
@@ -37,35 +37,58 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UserRegistration"
+                                "type": "object",
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "passwordConfirm"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "minLength": 8,
+                                        "example": "Password@123"
+                                    },
+                                    "passwordConfirm": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "Password@123"
+                                    }
+                                }
                             }
                         }
                     }
                 },
                 "responses": {
                     "201": {
-                        "description": "User registered successfully",
+                        "description": "Registration successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/responses/Success"
                                         },
-                                        "status": {
-                                            "type": "integer",
-                                            "example": 201
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "successfully"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/responses/SuccessWithToken"
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/responses/SuccessWithToken"
+                                                }
+                                            }
                                         }
-                                    }
+                                    ]
                                 }
                             }
                         }
@@ -119,7 +142,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Login successful",
+                        "description": "Logged in successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -318,24 +341,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "data": {
-                                                    "allOf": [
-                                                        {
-                                                            "$ref": "#/components/schemas/UserResponse"
-                                                        },
-                                                        {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "createdAt": {
-                                                                    "type": "string",
-                                                                    "format": "date-time"
-                                                                },
-                                                                "updatedAt": {
-                                                                    "type": "string",
-                                                                    "format": "date-time"
-                                                                }
-                                                            }
-                                                        }
-                                                    ]
+                                                    "$ref": "#/components/schemas/UserResponse"
                                                 }
                                             }
                                         }
@@ -638,11 +644,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "_id",
+                        "name": "id",
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer",
+                            "example": 1
                         },
                         "description": "User ID"
                     }
@@ -699,11 +706,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "_id",
+                        "name": "id",
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer",
+                            "example": 1
                         },
                         "description": "User ID"
                     },
@@ -770,11 +778,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "_id",
+                        "name": "id",
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer",
+                            "example": 1
                         },
                         "description": "User ID to delete"
                     }
@@ -870,26 +879,39 @@
             },
             "LoginResponse": {
                 "type": "object",
-                "allOf": [
-                    {
-                        "$ref": "#/components/responses/Success"
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "example": true
                     },
-                    {
+                    "status": {
+                        "type": "integer",
+                        "example": 200
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "User deleted successfully"
+                    },
+                    "data": {
                         "type": "object",
                         "properties": {
+                            "token": {
+                                "type": "string",
+                                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                            },
                             "data": {
-                                "$ref": "#/components/responses/SuccessWithToken"
+                                "$ref": "#/components/schemas/UserResponse"
                             }
                         }
                     }
-                ]
+                }
             },
             "UserResponse": {
                 "type": "object",
                 "properties": {
-                    "_id": {
-                        "type": "string",
-                        "example": "60d0fe4f5311236168a109ca"
+                    "id": {
+                        "type": "integer",
+                        "example": 1
                     },
                     "name": {
                         "type": "string",
@@ -911,6 +933,14 @@
                     "active": {
                         "type": "boolean",
                         "example": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
                     }
                 }
             },
@@ -995,21 +1025,7 @@
                         "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9yb2xlIjoidXNl..."
                     },
                     "users": {
-                        "type": "object",
-                        "properties": {
-                            "_id": {
-                                "type": "string",
-                                "example": "60d0fe4f5311236168a109ca"
-                            },
-                            "role": {
-                                "type": "string",
-                                "enum": [
-                                    "user",
-                                    "admin"
-                                ],
-                                "example": "user"
-                            }
-                        }
+                        "$ref": "#/components/schemas/UserResponse"
                     }
                 }
             },
@@ -1085,52 +1101,6 @@
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "ErrorResponse": {
-                "type": "object",
-                "properties": {
-                    "success": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "status": {
-                        "type": "integer",
-                        "example": 400
-                    },
-                    "message": {
-                        "type": "string",
-                        "example": "Error message describing what went wrong"
-                    },
-                    "code": {
-                        "type": "string",
-                        "example": "ERROR_CODE"
-                    },
-                    "errors": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "field": {
-                                    "type": "string",
-                                    "example": "email"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "example": "Invalid email format"
-                                },
-                                "type": {
-                                    "type": "string",
-                                    "example": "validation"
-                                }
-                            }
-                        }
-                    },
-                    "timestamp": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2025-11-14T09:12:28Z"
                     }
                 }
             },

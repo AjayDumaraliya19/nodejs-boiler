@@ -1,4 +1,4 @@
-// ./src/db/dbConnection.js
+// ./src/db/mongooseDB.js
 
 const Mongoose = require("mongoose");
 const { config } = require("../configs/envConfig.js");
@@ -37,5 +37,6 @@ const connectDB = async () => {
     }
 };
 
-// EXPORT MODEL -----
+
+/* ------------------------------ EXPORT MODEL ------------------------------ */
 module.exports = { connectDB };

@@ -18,33 +18,33 @@ const DEFAULT_PROJECT_NAME = "nodejs_boiler-app";
 /* ------------------ HELPER Function To cop Template Files ----------------- */
 async function copyTemplateFiles(source, destination, data = {}) {
     try {
-        /** == Create destination directory if it doesn't exist == */
+        // Create destination directory if it doesn't exist
         await fs.ensureDir(destination);
 
-        /** == Copy files from template directory == */
+        // Copy files from template directory
         const files = await fs.readdir(source);
 
         for (const file of files) {
-            /** == Skip node_modules and .git directories == */
+            // Skip node_modules and .git directories
             if (["node_modules", ".git", ".DS_Store"].includes(file)) continue;
 
             const srcPath = path.join(source, file);
             const destPath = path.join(destination, file);
 
-            /** == If it's a directory, copy its contents == */
+            // If it's a directory, copy its contents
             const stat = await fs.stat(srcPath);
 
             if (stat.isDirectory()) {
                 await fs.ensureDir(destPath);
                 await copyTemplateFiles(srcPath, destPath, data);
             } else {
-                /** == Process file content if it's package.json == */
+                // Process file content if it's package.json
                 if (file === "package.json" && (await fs.pathExists(destPath))) {
-                    /** == Merge package.json files if they exist == */
+                    // Merge package.json files if they exist
                     const srcPkg = JSON.parse(await fs.readFile(srcPath, "utf-8"));
                     const destPkg = JSON.parse(await fs.readFile(destPath, "utf-8"));
 
-                    /** == Merge dependancies == */
+                    // Merge dependancies
                     const mergedPkg = {
                         ...destPkg,
                         ...srcPkg,
@@ -56,17 +56,17 @@ async function copyTemplateFiles(source, destination, data = {}) {
                     // await fs.writeFile(destPath, JSON.stringify(mergedPkg, null, 2), "utf-8");
                     await fs.writeJson(destPath, mergedPkg, { spaces: 2 });
                 } else {
-                    /** == For other files, just copy them == */
+                    // For other files, just copy them
                     await fs.copyFile(srcPath, destPath);
 
-                    /** == If it's .env.example, rename it to .env == */
+                    // If it's .env.example, rename it to .env
                     if (file === ".env.example" && !(await fs.pathExists(path.join(destination, ".env")))) {
                         await fs.rename(destPath, path.join(destination, ".env"));
                     }
                 }
             }
 
-            /** == Set execute permission for shell scripts == */
+            // Set execute permission for shell scripts
             if (file.endsWith(".sh") || !path.extname(file)) {
                 await fs.chmod(destPath, 0o755);
             }
@@ -87,7 +87,7 @@ async function main() {
         let projectName = DEFAULT_PROJECT_NAME;
         let targetDir = process.cwd();
 
-        /** == Folder Selection == */
+        // Folder Selection
         const { folderChoice } = await inquirer.prompt([{
             type: "list",
             name: "folderChoice",
@@ -130,16 +130,19 @@ async function main() {
             await fs.ensureDir(targetDir);
         }
 
-        /** == Project type == */
+        // Project type
         const { projectType } = await inquirer.prompt([{
             type: "list",
             name: "projectType",
             message: "Select a variant:",
-            choices: [{ name: "mongodb", value: "mongodb" }],
+            choices: [
+                { name: "mongodb", value: "mongodb" },
+                { name: "postgresql", value: "sql" }
+            ],
             default: "mongodb"
         }]);
 
-        /** == Determine Template Directory based on Project Type == */
+        // Determine Template Directory based on Project Type
         const templateDir = path.join(TEMPLATE_DIR, projectType);
         const spinner = ora("Generating project...").start();
         const success = await copyTemplateFiles(templateDir, targetDir, { projectName, projectType });
@@ -148,30 +151,30 @@ async function main() {
             process.exit(1);
         };
 
-        /** == Update package.json based on projec type == */
+        // Update package.json based on projec type
         const packageJsonPath = path.join(targetDir, "package.json");
         if (await fs.pathExists(packageJsonPath)) {
             const pkg = await fs.readJson(packageJsonPath);
 
-            /** == Ensure scripts and dependencies exists == */
+            // Ensure scripts and dependencies exists
             pkg.scripts = pkg.scripts || {};
             pkg.dependencies = pkg.dependencies || {};
             pkg.devDependencies = pkg.devDependencies || {};
 
-            /** == Common Scripts == */
+            // Common Scripts
             pkg.scripts.start = "node src/index.js";
             pkg.scripts.dev = "nodemon src/index.js";
 
-            /** == Add ESLint + Jest == */
+            // Add ESLint + Jest
             Object.assign(pkg.devDependencies, { "nodemon": "^3.1.10" });
 
             await fs.writeJson(packageJsonPath, pkg, { spaces: 2 });
         }
 
-        /** == Show success message == */
+        // Show success message
         spinner.succeed("✅ Project generated successfully!");
 
-        /** == Final Instructions == */
+        // Final Instructions
         console.log(chalk.cyan.bold("\nNext Steps:"));
         const nextSteps = [
             `cd ${path.relative(process.cwd(), targetDir) || "."}`,

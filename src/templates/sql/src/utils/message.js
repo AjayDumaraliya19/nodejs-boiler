@@ -1,8 +1,8 @@
 // ./src/utils/message.js
 
-const { ObjectId } = require("mongoose").Types;
-
-/* ---------------------------- Validates Message --------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                              Validates Message                             */
+/* -------------------------------------------------------------------------- */
 /**
  * @type {Object}
  * @description Validates message
@@ -33,23 +33,6 @@ exports.messages = {
         required: `{{#label}} is required`,
         only: `{{#label}} must be one of {{#valids}}`
     }
-};
-
-
-/* -------------------------------------------------------------------------- */
-/*                         Validates MongoDB ObjectId                         */
-/* -------------------------------------------------------------------------- */
-/**
- * Validates if a string is a valid MongoDB ObjectId
- * @param {string} value - The value to validate
- * @param {Object} helpers - Joi helpers object
- * @returns {string|Joi.Error} The value if valid, or a Joi error
- */
-exports.objectId = (value, helpers) => {
-    if (!ObjectId.isValid(value)) {
-        return helpers.message(`"{{#label}}" must be a valid mongo id`);
-    };
-    return value;
 };
 
 

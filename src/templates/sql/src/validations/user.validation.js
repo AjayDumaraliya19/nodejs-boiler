@@ -108,6 +108,20 @@ exports.reset_validation = {
                 "string.empty": messages.string.empty,
                 "any.required": messages.any.required
             })
+    }),
+    body: Joi.object({
+        password: Joi.string().required()
+            .custom(password, "Password Validation")
+            .messages({
+                "string.base": messages.string.base,
+                "string.empty": messages.string.empty,
+                "any.required": messages.any.required
+            }),
+        passwordConfirm: Joi.any().valid(Joi.ref("password")).required()
+            .messages({
+                "any.only": "Password confirmation does not match password",
+                "any.required": messages.any.required
+            })
     })
 };
 
@@ -144,10 +158,10 @@ exports.updateMe_validation = {
 /* -------------------------------------------------------------------------- */
 /**
  * @desc Joi schema for the user update password input.
- * @fields (password, newPassword, newPasswordConfirm) required
+ * @fields (password, newpassword, newpasswordConfirm) required
  * - password: validated with custom password rules
  * - newpassword: validated with custom password rules
- * - newpasswordConfirm: must match newPassword
+ * - newpasswordConfirm: must match newpassword
  */
 exports.updatePassword_validation = {
     body: Joi.object({
@@ -217,10 +231,9 @@ exports.userListPagination_validation = {
  */
 exports.userById_validation = {
     query: Joi.object({
-        _id: Joi.string().trim().required()
+        id: Joi.number().integer().required()
             .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
+                "number.base": messages.number.base,
                 "any.required": messages.any.required
             })
     })
@@ -238,7 +251,7 @@ exports.userById_validation = {
  */
 exports.updateUser_validation = {
     query: Joi.object({
-        _id: Joi.string().trim().required()
+        id: Joi.string().trim().required()
             .messages({
                 "string.base": messages.string.base,
                 "string.empty": messages.string.empty,
@@ -263,7 +276,7 @@ exports.updateUser_validation = {
  */
 exports.deleteUser_validation = {
     query: Joi.object({
-        _id: Joi.string().trim().required()
+        id: Joi.string().trim().required()
             .messages({
                 "string.base": messages.string.base,
                 "string.empty": messages.string.empty,

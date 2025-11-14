@@ -24,7 +24,7 @@ const generateFilePath = (folderName) => {
     };
 
     return path.join(logDirectory, `${hour}.log`);
-}
+};
 
 
 /* -------------------------------------------------------------------------- */

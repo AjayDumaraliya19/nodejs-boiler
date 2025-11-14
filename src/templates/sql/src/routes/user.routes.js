@@ -28,7 +28,7 @@ router.patch("/reset-password", validate(userValidation.reset_validation), userC
  */
 router.use(protect); // All routes below this middleware are protected
 router.get("/me", userControllers.get_me); // Get current user profile
-router.patch("/update-me", userControllers.update_me); // Update current user profile
+router.patch("/update-me", validate(userValidation.updateMe_validation), userControllers.update_me); // Update current user profile
 router.patch("/update-password", validate(userValidation.updatePassword_validation), userControllers.update_password); // Update password
 
 

@@ -83,6 +83,7 @@ const userSchema = new Mongoose.Schema(
     }
 );
 
+
 /* -------------------------------------------------------------------------- */
 /*                                   INDEXES                                  */
 /* -------------------------------------------------------------------------- */
@@ -92,6 +93,7 @@ const userSchema = new Mongoose.Schema(
  */
 userSchema.index({ email: 1, active: 1 });
 userSchema.index({ role: 1, active: 1 });
+
 
 /* -------------------------------------------------------------------------- */
 /*                                 Middleware                                 */
@@ -112,6 +114,7 @@ userSchema.pre("save", async function (next) {
     }
 });
 
+
 /**
  * @type {Function}
  * @description Update passwordChangedAt when password is modified
@@ -121,6 +124,7 @@ userSchema.pre("save", function (next) {
     this.passwordChangedAt = Date.now() - 1000; // Ensure token is created after password change
     next();
 });
+
 
 /* -------------------------------------------------------------------------- */
 /*                                   METHODS                                  */
@@ -133,6 +137,7 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
 };
 
+
 /**
  * @type {Function}
  * @description Check if password changed after token issue
@@ -144,6 +149,7 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
     };
     return false;
 };
+
 
 /**
  * @type {Function}
@@ -162,6 +168,7 @@ userSchema.methods.createPasswordResetToken = function () {
     // Return the plain token (to email to user) -----
     return resetToken;
 }
+
 
 /* -------------------------------------------------------------------------- */
 /*                                Export Model                                */
