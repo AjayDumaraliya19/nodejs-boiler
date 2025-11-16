@@ -11,14 +11,13 @@
  * @returns {Object} A new object containing only the picked keys.
  */
 const pick = (object, keys) => {
-    return keys.reduce((obj, key) => {
-        if (object && Object.prototype.hasOwnProperty.call(object, key)) {
-            obj[key] = object[key];
-        }
-        return obj;
-    }, {});
+  return keys.reduce((obj, key) => {
+    if (object && Object.prototype.hasOwnProperty.call(object, key)) {
+      obj[key] = object[key];
+    }
+    return obj;
+  }, {});
 };
-
 
 /* ------------------------------ EXPORT MODEL ------------------------------ */
 module.exports = { pick };

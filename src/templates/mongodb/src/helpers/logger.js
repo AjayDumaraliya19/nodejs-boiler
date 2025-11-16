@@ -14,18 +14,17 @@ const fs = require("fs");
  * @returns {string}
  */
 const generateFilePath = (folderName) => {
-    const now = new Date();
-    const date = now.toISOString().split("T")[0];
-    const hour = now.getHours();
-    const logDirectory = path.join(__dirname, `../../logs/${folderName}`, date);
+  const now = new Date();
+  const date = now.toISOString().split("T")[0];
+  const hour = now.getHours();
+  const logDirectory = path.join(__dirname, `../../logs/${folderName}`, date);
 
-    if (!fs.existsSync(logDirectory)) {
-        fs.mkdirSync(logDirectory, { recursive: true });
-    };
+  if (!fs.existsSync(logDirectory)) {
+    fs.mkdirSync(logDirectory, { recursive: true });
+  }
 
-    return path.join(logDirectory, `${hour}.log`);
-}
-
+  return path.join(logDirectory, `${hour}.log`);
+};
 
 /* -------------------------------------------------------------------------- */
 /*                       Initializes log4js Folder wise                       */
@@ -36,29 +35,28 @@ const generateFilePath = (folderName) => {
  * @param {string} folderName - The name of the folder
  */
 const setupLogger = (folderName) => {
-    log4js.configure({
-        appenders: {
-            file: {
-                type: "file",
-                filename: generateFilePath(folderName),
-                maxLogSize: 5 * 1024 * 1024, // 5 MB rotation
-                backups: 5,
-                compress: true,
-                layout: {
-                    type: "pattern",
-                    pattern: "[%d{yyyy-MM-dd hh:mm:ss}] [%p] %m"
-                }
-            }
+  log4js.configure({
+    appenders: {
+      file: {
+        type: "file",
+        filename: generateFilePath(folderName),
+        maxLogSize: 5 * 1024 * 1024, // 5 MB rotation
+        backups: 5,
+        compress: true,
+        layout: {
+          type: "pattern",
+          pattern: "[%d{yyyy-MM-dd hh:mm:ss}] [%p] %m",
         },
-        categories: {
-            default: {
-                appenders: ["file"],
-                level: "debug"
-            }
-        }
-    });
+      },
+    },
+    categories: {
+      default: {
+        appenders: ["file"],
+        level: "debug",
+      },
+    },
+  });
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                           Request Logging Helper                           */
@@ -69,12 +67,11 @@ const setupLogger = (folderName) => {
  * @param {Object} req - The request object
  */
 const logRequestDetails = (req) => {
-    logger.info(`URL: ${req.method} ${req.originalUrl}`);
-    logger.info(`Headers: ${JSON.stringify(req.headers)}`);
-    logger.info(`Body: ${JSON.stringify(req.body)}`);
-    logger.info("=====================================\n");
+  logger.info(`URL: ${req.method} ${req.originalUrl}`);
+  logger.info(`Headers: ${JSON.stringify(req.headers)}`);
+  logger.info(`Body: ${JSON.stringify(req.body)}`);
+  logger.info("=====================================\n");
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                          Export Configured Logger                          */

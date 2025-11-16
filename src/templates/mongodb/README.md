@@ -104,6 +104,7 @@ nodejs-boiler/
 ## 📦 Dependencies
 
 ### Core Dependencies
+
 - `express` - Web framework
 - `joi` - Object schema validation
 - `bcryptjs` - Password hashing
@@ -119,6 +120,7 @@ nodejs-boiler/
 - `swagger-ui-express` - API documentation
 
 ### Development Dependencies
+
 - `nodemon` - Development server with auto-reload
 
 ---
@@ -126,16 +128,19 @@ nodejs-boiler/
 ## ⚙️ Installation & Setup
 
 1. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 2. **Update Packages (optional)**
+
    ```bash
    npm update
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env
    # Edit .env with your configuration
@@ -156,16 +161,19 @@ nodejs-boiler/
    ```
 
 4. **Start the development server**
+
    ```bash
    npm run dev
    ```
 
 5. **Run the tests**
+
    ```bash
    npm run test
    ```
 
 6. **Run the tests with coverage**
+
    ```bash
    npm run test -- --coverage
    ```
@@ -191,14 +199,15 @@ They are grouped as **Public**, **Protected (Authenticated)**, and **Admin-only*
 
 ### 🌍 **Public Routes** (No Authentication Required)
 
-| Method | Endpoint | Description |
-|---------|-----------|-------------|
-| `POST` | `/api/user/register` | Register a new user |
-| `POST` | `/api/user/login` | Login and receive JWT token |
-| `POST` | `/api/user/forgot-password` | Request password reset link |
-| `PATCH` | `/api/user/reset-password` | Reset password using token |
+| Method  | Endpoint                    | Description                 |
+| ------- | --------------------------- | --------------------------- |
+| `POST`  | `/api/user/register`        | Register a new user         |
+| `POST`  | `/api/user/login`           | Login and receive JWT token |
+| `POST`  | `/api/user/forgot-password` | Request password reset link |
+| `PATCH` | `/api/user/reset-password`  | Reset password using token  |
 
 **Notes:**
+
 - Public routes are open to everyone.
 - Validation is handled using `schemaValidation.js` and `userValidation` rules.
 
@@ -206,16 +215,18 @@ They are grouped as **Public**, **Protected (Authenticated)**, and **Admin-only*
 
 ### 🔐 **Protected Routes** (Require Authentication)
 
-| Method | Endpoint | Description |
-|---------|-----------|-------------|
-| `GET` | `/api/user/me` | Get the logged-in user’s profile |
-| `PATCH` | `/api/user/update-me` | Update your own profile details |
-| `PATCH` | `/api/user/update-password` | Update your account password |
-| `GET` | `/api/user/logout` | Logout the current user |
+| Method  | Endpoint                    | Description                      |
+| ------- | --------------------------- | -------------------------------- |
+| `GET`   | `/api/user/me`              | Get the logged-in user’s profile |
+| `PATCH` | `/api/user/update-me`       | Update your own profile details  |
+| `PATCH` | `/api/user/update-password` | Update your account password     |
+| `GET`   | `/api/user/logout`          | Logout the current user          |
 
 **Notes:**
+
 - Protected routes require a valid `Bearer Token` in the Authorization header.
   Example:
+
 ```javascript
 Authorization: Bearer <token>
 ```
@@ -224,15 +235,16 @@ Authorization: Bearer <token>
 
 ### 🛡️ **Admin-only Routes**
 
-| Method | Endpoint | Description |
-|---------|-----------|-------------|
-| `GET` | `/api/user/admin/user/list` | Get a list of all users |
-| `POST` | `/api/user/admin/user/pagelist` | Get paginated list of users |
-| `GET` | `/api/user/admin/user` | Get user details by ID |
-| `PATCH` | `/api/user/admin/user` | Update user details by ID |
-| `DELETE` | `/api/user/admin/user` | Delete user by ID |
+| Method   | Endpoint                        | Description                 |
+| -------- | ------------------------------- | --------------------------- |
+| `GET`    | `/api/user/admin/user/list`     | Get a list of all users     |
+| `POST`   | `/api/user/admin/user/pagelist` | Get paginated list of users |
+| `GET`    | `/api/user/admin/user`          | Get user details by ID      |
+| `PATCH`  | `/api/user/admin/user`          | Update user details by ID   |
+| `DELETE` | `/api/user/admin/user`          | Delete user by ID           |
 
 **Notes:**
+
 - Admin routes are protected using middleware:
 - `protect` → verifies JWT authentication
 - `restrictTo(['admin'])` → checks for admin role
@@ -242,13 +254,13 @@ Authorization: Bearer <token>
 
 ### 🧩 **Middlewares Used**
 
-| Middleware | Description |
-|-------------|-------------|
-| `protect` | Ensures the user is authenticated |
-| `restrictTo(["admin"])` | Restricts access to admins only |
-| `validate(schema)` | Validates request body using predefined schemas |
-| `schemaValidation.js` | Centralized input validation |
-| `auth.js` | Handles JWT token verification and user permissions |
+| Middleware              | Description                                         |
+| ----------------------- | --------------------------------------------------- |
+| `protect`               | Ensures the user is authenticated                   |
+| `restrictTo(["admin"])` | Restricts access to admins only                     |
+| `validate(schema)`      | Validates request body using predefined schemas     |
+| `schemaValidation.js`   | Centralized input validation                        |
+| `auth.js`               | Handles JWT token verification and user permissions |
 
 ---
 
@@ -288,6 +300,7 @@ return errorResponse(res, "Invalid credentials", 401);
 ### Authentication
 
 #### Register a New User
+
 ```http
 POST /api/auth/register
 Content-Type: application/json
@@ -301,6 +314,7 @@ Content-Type: application/json
 ```
 
 #### User Login
+
 ```http
 POST /api/auth/login
 Content-Type: application/json
@@ -314,12 +328,14 @@ Content-Type: application/json
 ### User Management
 
 #### Get User Profile
+
 ```http
 GET /api/v1/user/me
 Authorization: Bearer your-jwt-token
 ```
 
 #### Update User Profile
+
 ```http
 PATCH /api/v1/user/update-me
 Authorization: Bearer your-jwt-token
@@ -334,12 +350,14 @@ Content-Type: application/json
 ### Admin Endpoints
 
 #### Get All Users (Admin Only)
+
 ```http
 GET /api/v1/user/admin/user/list
 Authorization: Bearer your-admin-jwt-token
 ```
 
 #### Delete User (Admin Only)
+
 ```http
 DELETE /api/v1/user/admin/user?id=USER_ID
 Authorization: Bearer your-admin-jwt-token

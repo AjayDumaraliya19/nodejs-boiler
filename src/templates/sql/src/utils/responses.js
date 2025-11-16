@@ -11,14 +11,13 @@
  * @returns {Object} JSON response
  */
 exports.success = (res, data = null, message = "Success") => {
-    return res.status(200).json({
-        success: true,
-        status: 200,
-        message,
-        data
-    });
+  return res.status(200).json({
+    success: true,
+    status: 200,
+    message,
+    data,
+  });
 };
-
 
 /**
  * 201 Created Response
@@ -27,15 +26,18 @@ exports.success = (res, data = null, message = "Success") => {
  * @param {String} message - Success message
  * @returns {Object} JSON response
  */
-exports.created = (res, data = null, message = "Resource created successfully") => {
-    return res.status(201).json({
-        success: true,
-        status: 201,
-        message,
-        data
-    });
+exports.created = (
+  res,
+  data = null,
+  message = "Resource created successfully",
+) => {
+  return res.status(201).json({
+    success: true,
+    status: 201,
+    message,
+    data,
+  });
 };
-
 
 /**
  * 202 Accepted Response
@@ -44,13 +46,12 @@ exports.created = (res, data = null, message = "Resource created successfully") 
  * @returns {Object} JSON response
  */
 exports.accepted = (res, message = "Request accepted for processing") => {
-    return res.status(202).json({
-        success: true,
-        status: 202,
-        message
-    });
+  return res.status(202).json({
+    success: true,
+    status: 202,
+    message,
+  });
 };
-
 
 /**
  * 204 No Content Response
@@ -58,9 +59,8 @@ exports.accepted = (res, message = "Request accepted for processing") => {
  * @returns {Object} Empty response
  */
 exports.noContent = (res) => {
-    return res.status(204).end();
+  return res.status(204).end();
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                              4xx Client Errors                             */
@@ -73,14 +73,13 @@ exports.noContent = (res) => {
  * @returns {Object} JSON response
  */
 exports.badRequest = (res, message = "Bad Request", errors = null) => {
-    return res.status(400).json({
-        success: false,
-        status: 400,
-        message,
-        errors: errors || undefined
-    });
+  return res.status(400).json({
+    success: false,
+    status: 400,
+    message,
+    errors: errors || undefined,
+  });
 };
-
 
 /**
  * 401 Unauthorized Response
@@ -89,13 +88,12 @@ exports.badRequest = (res, message = "Bad Request", errors = null) => {
  * @returns {Object} JSON response
  */
 exports.unauthorized = (res, message = "Unauthorized") => {
-    return res.status(401).json({
-        success: false,
-        status: 401,
-        message
-    });
+  return res.status(401).json({
+    success: false,
+    status: 401,
+    message,
+  });
 };
-
 
 /**
  * 402 Payment Required Response
@@ -104,13 +102,12 @@ exports.unauthorized = (res, message = "Unauthorized") => {
  * @returns {Object} JSON response
  */
 exports.paymentRequired = (res, message = "Payment Required") => {
-    return res.status(402).json({
-        success: false,
-        status: 402,
-        message
-    });
+  return res.status(402).json({
+    success: false,
+    status: 402,
+    message,
+  });
 };
-
 
 /**
  * 403 Forbidden Response
@@ -119,13 +116,12 @@ exports.paymentRequired = (res, message = "Payment Required") => {
  * @returns {Object} JSON response
  */
 exports.forbidden = (res, message = "Forbidden") => {
-    return res.status(403).json({
-        success: false,
-        status: 403,
-        message
-    });
+  return res.status(403).json({
+    success: false,
+    status: 403,
+    message,
+  });
 };
-
 
 /**
  * 404 Not Found Response
@@ -134,13 +130,12 @@ exports.forbidden = (res, message = "Forbidden") => {
  * @returns {Object} JSON response
  */
 exports.notFound = (res, message = "Resource not found") => {
-    return res.status(404).json({
-        success: false,
-        status: 404,
-        message
-    });
+  return res.status(404).json({
+    success: false,
+    status: 404,
+    message,
+  });
 };
-
 
 /**
  * 405 Method Not Allowed Response
@@ -149,13 +144,12 @@ exports.notFound = (res, message = "Resource not found") => {
  * @returns {Object} JSON response
  */
 exports.methodNotAllowed = (res, message = "Method Not Allowed") => {
-    return res.status(405).json({
-        success: false,
-        status: 405,
-        message
-    });
+  return res.status(405).json({
+    success: false,
+    status: 405,
+    message,
+  });
 };
-
 
 /**
  * 406 Not Acceptable Response
@@ -164,13 +158,12 @@ exports.methodNotAllowed = (res, message = "Method Not Allowed") => {
  * @returns {Object} JSON response
  */
 exports.notAcceptable = (res, message = "Not Acceptable") => {
-    return res.status(406).json({
-        success: false,
-        status: 406,
-        message
-    });
+  return res.status(406).json({
+    success: false,
+    status: 406,
+    message,
+  });
 };
-
 
 /**
  * 408 Request Timeout Response
@@ -179,13 +172,12 @@ exports.notAcceptable = (res, message = "Not Acceptable") => {
  * @returns {Object} JSON response
  */
 exports.requestTimeout = (res, message = "Request Timeout") => {
-    return res.status(408).json({
-        success: false,
-        status: 408,
-        message
-    });
+  return res.status(408).json({
+    success: false,
+    status: 408,
+    message,
+  });
 };
-
 
 /**
  * 409 Conflict Response
@@ -195,14 +187,13 @@ exports.requestTimeout = (res, message = "Request Timeout") => {
  * @returns {Object} JSON response
  */
 exports.conflict = (res, message = "Conflict", data = null) => {
-    return res.status(409).json({
-        success: false,
-        status: 409,
-        message,
-        data: data ?? undefined
-    });
+  return res.status(409).json({
+    success: false,
+    status: 409,
+    message,
+    data: data ?? undefined,
+  });
 };
-
 
 /**
  * 410 Gone Response
@@ -211,13 +202,12 @@ exports.conflict = (res, message = "Conflict", data = null) => {
  * @returns {Object} JSON response
  */
 exports.gone = (res, message = "Resource is no longer available") => {
-    return res.status(410).json({
-        success: false,
-        status: 410,
-        message
-    });
+  return res.status(410).json({
+    success: false,
+    status: 410,
+    message,
+  });
 };
-
 
 /**
  * 422 Unprocessable Entity Response
@@ -227,14 +217,13 @@ exports.gone = (res, message = "Resource is no longer available") => {
  * @returns {Object} JSON response
  */
 exports.validationError = (res, errors, message = "Validation Error") => {
-    return res.status(422).json({
-        success: false,
-        status: 422,
-        message,
-        errors
-    });
+  return res.status(422).json({
+    success: false,
+    status: 422,
+    message,
+    errors,
+  });
 };
-
 
 /**
  * 429 Too Many Requests Response
@@ -243,16 +232,19 @@ exports.validationError = (res, errors, message = "Validation Error") => {
  * @param {Number} retryAfter - Seconds to wait before next request
  * @returns {Object} JSON response
  */
-exports.tooManyRequests = (res, message = "Too Many Requests", retryAfter = 60) => {
-    res.set('Retry-After', String(retryAfter));
-    return res.status(429).json({
-        success: false,
-        status: 429,
-        message,
-        retryAfter
-    });
+exports.tooManyRequests = (
+  res,
+  message = "Too Many Requests",
+  retryAfter = 60,
+) => {
+  res.set("Retry-After", String(retryAfter));
+  return res.status(429).json({
+    success: false,
+    status: 429,
+    message,
+    retryAfter,
+  });
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                              5xx Server Errors                             */
@@ -264,18 +256,21 @@ exports.tooManyRequests = (res, message = "Too Many Requests", retryAfter = 60) 
  * @param {Error} error - Error object for logging
  * @returns {Object} JSON response
  */
-exports.serverError = (res, message = "Internal Server Error", error = null) => {
-    if (error) {
-        console.error("Server Error:", error);
-    }
-    return res.status(500).json({
-        success: false,
-        status: 500,
-        message,
-        error: error?.message ?? undefined
-    });
+exports.serverError = (
+  res,
+  message = "Internal Server Error",
+  error = null,
+) => {
+  if (error) {
+    console.error("Server Error:", error);
+  }
+  return res.status(500).json({
+    success: false,
+    status: 500,
+    message,
+    error: error?.message ?? undefined,
+  });
 };
-
 
 /**
  * 501 Not Implemented Response
@@ -284,13 +279,12 @@ exports.serverError = (res, message = "Internal Server Error", error = null) => 
  * @returns {Object} JSON response
  */
 exports.notImplemented = (res, message = "Not Implemented") => {
-    return res.status(501).json({
-        success: false,
-        status: 501,
-        message
-    });
+  return res.status(501).json({
+    success: false,
+    status: 501,
+    message,
+  });
 };
-
 
 /**
  * 502 Bad Gateway Response
@@ -299,13 +293,12 @@ exports.notImplemented = (res, message = "Not Implemented") => {
  * @returns {Object} JSON response
  */
 exports.badGateway = (res, message = "Bad Gateway") => {
-    return res.status(502).json({
-        success: false,
-        status: 502,
-        message
-    });
+  return res.status(502).json({
+    success: false,
+    status: 502,
+    message,
+  });
 };
-
 
 /**
  * 503 Service Unavailable Response
@@ -314,13 +307,12 @@ exports.badGateway = (res, message = "Bad Gateway") => {
  * @returns {Object} JSON response
  */
 exports.serviceUnavailable = (res, message = "Service Unavailable") => {
-    return res.status(503).json({
-        success: false,
-        status: 503,
-        message
-    });
+  return res.status(503).json({
+    success: false,
+    status: 503,
+    message,
+  });
 };
-
 
 /**
  * 504 Gateway Timeout Response
@@ -329,13 +321,12 @@ exports.serviceUnavailable = (res, message = "Service Unavailable") => {
  * @returns {Object} JSON response
  */
 exports.gatewayTimeout = (res, message = "Gateway Timeout") => {
-    return res.status(504).json({
-        success: false,
-        status: 504,
-        message
-    });
+  return res.status(504).json({
+    success: false,
+    status: 504,
+    message,
+  });
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                              Utility Responses                             */
@@ -351,25 +342,24 @@ exports.gatewayTimeout = (res, message = "Gateway Timeout") => {
  * @returns {Object} JSON response
  */
 exports.paginated = (res, data, total, page, limit, message = "Success") => {
-    const totalPages = Math.ceil(total / limit);
-    const hasNext = page < totalPages;
-    const hasPrevious = page > 1;
+  const totalPages = Math.ceil(total / limit);
+  const hasNext = page < totalPages;
+  const hasPrevious = page > 1;
 
-    return res.status(200).json({
-        success: true,
-        status: 200,
-        message,
-        total,
-        data,
-        pagination: {
-            limit,
-            hasPrevious,
-            page,
-            hasNext
-        }
-    });
+  return res.status(200).json({
+    success: true,
+    status: 200,
+    message,
+    total,
+    data,
+    pagination: {
+      limit,
+      hasPrevious,
+      page,
+      hasNext,
+    },
+  });
 };
-
 
 /**
  * Generic Error Response
@@ -379,11 +369,16 @@ exports.paginated = (res, data, total, page, limit, message = "Success") => {
  * @param {Object} errors - Additional error details
  * @returns {Object} JSON response
  */
-exports.error = (res, message = "An error occurred", status = 400, errors = null) => {
-    return res.status(status).json({
-        success: false,
-        status,
-        message,
-        errors: errors || undefined
-    });
+exports.error = (
+  res,
+  message = "An error occurred",
+  status = 400,
+  errors = null,
+) => {
+  return res.status(status).json({
+    success: false,
+    status,
+    message,
+    errors: errors || undefined,
+  });
 };

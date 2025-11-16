@@ -13,7 +13,7 @@ const initAdmin = async () => {
     if (adminExists) {
       console.log("Admin user already exists. No action needed.");
       process.exit(0);
-    };
+    }
 
     // Create admin user -----
     const name = "Admin";

@@ -19,6 +19,7 @@ Building a new Node.js project from scratch involves repetitive setup tasks, con
 ## ✨ Features
 
 ### Core Features
+
 - 🏗️ **One-command project generation** - Get started in seconds
 - 🚀 **Express.js** with modern ES modules (ESM)
 - 🔒 **JWT Authentication** with role-based access control
@@ -26,6 +27,7 @@ Building a new Node.js project from scratch involves repetitive setup tasks, con
 - 📝 **API documentation** with Swagger/OpenAPI
 
 ### 🗄️ MongoDB Features
+
 - **Mongoose ODM** for elegant MongoDB object modeling
 - **Schema Validation** - Enforce data integrity
 - **Middleware Support** - Pre/post hooks for business logic
@@ -35,6 +37,7 @@ Building a new Node.js project from scratch involves repetitive setup tasks, con
 - **Aggregation Pipeline** - Powerful data processing
 
 ### SQL Features
+
 - **Sequelize ORM** for SQL databases
 - Support for PostgreSQL, MySQL, SQLite, MSSQL
 - Database migrations and seeders
@@ -43,20 +46,23 @@ Building a new Node.js project from scratch involves repetitive setup tasks, con
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 16.x or higher
 - npm 6.x or higher
 
-
 ### Step 1: Install the Boilerplate
+
 Choose one of the following methods:
 
 #### Method 1: Using npx (Recommended)
+
 ```bash
 # Create a new project
 npx nodejs-boiler
 ```
 
 #### Method 2: Global Installation
+
 ```bash
 # Install globally
 npm install -g nodejs-boiler
@@ -65,9 +71,10 @@ npm install -g nodejs-boiler
 nodejs-boiler
 ```
 
-
 ### Step 2: Verify Installation
+
 1. Start your application:
+
    ```bash
    # Development mode with hot-reload
    npm run dev
@@ -79,17 +86,19 @@ nodejs-boiler
 ## ⚙️ Project configuration
 
 ### 1. Environment Configuration
+
 Create a `.env.example` file in your project root.
 
 ### 2. Database Connection
+
 Your application automatically connects to database on startup. The connection is managed in `src/db` folder.
 
 ### 3. Verify the Connection
+
 1. Check the console for successful MongoDB connection message
 2. Check the Api working Visit `http://localhost:8080/`
 3. Visit `http://localhost:8080/health` for API health status
 4. Access Swagger docs at `http://localhost:8080/api/docs`
-
 
 ### Quick Start
 
@@ -122,14 +131,13 @@ cp .env.example .env
 npm run dev
 ```
 
-
 ### Key Features of the User Model:
+
 - **Schema Validation**: Built-in validation for all fields
 - **Password Hashing**: Automatic password hashing before save
 - **Security**: Passwords are not returned by default
 - **Timestamps**: Automatic `createdAt` and `updatedAt` fields
 - **Role-based Access**: User roles with 'user' and 'admin' options
-
 
 ## Project Structure 📂
 
@@ -186,16 +194,19 @@ project-root/
 ## 🏆 Best Practices ✅
 
 ### Code Style
+
 - Write meaningful commit messages
 - Document your code with JSDoc
 
 ### Security
+
 - Always use environment variables for sensitive data
 - Implement proper input validation
 - Use parameterized queries to prevent SQL injection
 - Implement rate limiting and CORS
 
 ### Performance
+
 - Use database indexing for frequently queried fields
 - Implement caching where appropriate
 - Optimize database queries
@@ -224,6 +235,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you find this project helpful, please consider giving it a ⭐️ on [GitHub](https://github.com/AjayDumaraliya19/nodejs-boiler).
 
 ## Acknowledgments
+
 - [Express.js](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/) / [Mongoose](https://mongoosejs.com/)
 - [JWT](https://jwt.io/)

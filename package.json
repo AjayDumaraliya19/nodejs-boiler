@@ -1,44 +1,91 @@
 {
   "name": "nodejs-boiler",
   "version": "1.0.6",
-  "description": "A fast and modern Node.js project boilerplate generator CLI that instantly sets up a ready-to-use Express app with folder structure, authentication, error handling, and reusable utilities.",
+  "description": "🚀 A fast, modern, and production-ready Node.js project boilerplate generator CLI. Quickly scaffold a full-featured Express.js application with authentication, database setup, API structure, and best practices.",
   "type": "module",
   "main": "src/index.js",
   "bin": {
     "nodejs-boiler": "./src/index.js"
   },
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "node ./src/index.js",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AjayDumaraliya19/nodejs-boiler.git"
+  },
+  "homepage": "https://github.com/AjayDumaraliya19/nodejs-boiler#readme",
+  "bugs": {
+    "url": "https://github.com/AjayDumaraliya19/nodejs-boiler/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/AjayDumaraliya19"
   },
   "author": {
     "name": "Ajay Dumaraliya",
     "url": "https://github.com/AjayDumaraliya19"
   },
+  "contributors": [
+    {
+      "name": "Ajay Dumaraliya",
+      "url": "https://github.com/AjayDumaraliya19"
+    }
+  ],
   "license": "MIT",
   "keywords": [
     "nodejs",
     "boilerplate",
     "starter",
     "template",
-    "setup",
+    "scaffold",
     "generator",
     "project",
-    "scaffold",
     "initializer",
     "cli",
-    "automation",
-    "tool",
-    "command-line",
-    "npx",
-    "create",
-    "clean-architecture",
-    "backend",
     "express",
     "typescript",
     "javascript",
+    "mongodb",
     "mongoose",
-    "mySQL",
-    "PostgreSQL"
+    "mysql",
+    "postgresql",
+    "sql",
+    "nosql",
+    "authentication",
+    "jwt",
+    "rest",
+    "api",
+    "graphql",
+    "docker",
+    "kubernetes",
+    "microservices",
+    "server",
+    "backend",
+    "fullstack",
+    "mvc",
+    "clean-architecture",
+    "best-practices",
+    "eslint",
+    "prettier",
+    "jest",
+    "testing"
+  ],
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "files": [
+    "src/",
+    "templates/",
+    "LICENSE",
+    "README.md"
   ],
   "dependencies": {
     "chalk": "^5.6.2",
@@ -47,13 +94,7 @@
     "ora": "^9.0.0"
   },
   "devDependencies": {
+    "prettier": "^3.0.0",
     "nodemon": "^3.1.10"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "files": [
-    "src/",
-    "template/"
-  ]
+  }
 }

@@ -14,15 +14,14 @@ const { logger, setupLogger } = require("./logger.js");
  * @throws {Error}
  */
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-        user: config.email.sender,
-        pass: config.email.pass,
-    },
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: config.email.sender,
+    pass: config.email.pass,
+  },
 });
-
 
 /* -------------------------------------------------------------------------- */
 /*                    Verify SMTP configuration at startup                    */
@@ -33,15 +32,16 @@ const transporter = nodemailer.createTransport({
  * @returns {Promise}
  * @throws {Error}
  */
-transporter.verify()
-    .then(() => {
-        console.log("📧 Mail transporter ready");
-    }).catch((err) => {
-        setupLogger("Email");
-        console.log("📧 Mail transporter verify failed:", err?.message);
-        logger.warn(`Mail transporter verify failed: ${err?.message}`);
-    });
-
+transporter
+  .verify()
+  .then(() => {
+    console.log("📧 Mail transporter ready");
+  })
+  .catch((err) => {
+    setupLogger("Email");
+    console.log("📧 Mail transporter verify failed:", err?.message);
+    logger.warn(`Mail transporter verify failed: ${err?.message}`);
+  });
 
 /* -------------------------------------------------------------------------- */
 /*                                Send an email                               */
@@ -56,18 +56,18 @@ transporter.verify()
  * @param {string} [opts.text] - Plain text content
  */
 exports.sendMail = async ({ to, subject, html, text }) => {
-    if (!to || !subject) throw new Error("to and subject are required for sendMail");
-    const mailOptions = {
-        from: config.email.sender,
-        to,
-        subject,
-        text: text || undefined,
-        html: html || undefined,
-    };
+  if (!to || !subject)
+    throw new Error("to and subject are required for sendMail");
+  const mailOptions = {
+    from: config.email.sender,
+    to,
+    subject,
+    text: text || undefined,
+    html: html || undefined,
+  };
 
-    return transporter.sendMail(mailOptions);
+  return transporter.sendMail(mailOptions);
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                         Common HTML Email Template                         */
@@ -81,8 +81,14 @@ exports.sendMail = async ({ to, subject, html, text }) => {
  * @param {string} token - OTP or verification token
  * @returns {string} - Formatted HTML message
  */
-exports.generateEmailMessage = (header, description, user, token, support = "support@example.com") => {
-    return `
+exports.generateEmailMessage = (
+  header,
+  description,
+  user,
+  token,
+  support = "support@example.com",
+) => {
+  return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
         <div style="background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
             <h2 style="color: #333333; text-align: center; margin-bottom: 20px;">${header}</h2>

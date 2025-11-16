@@ -15,34 +15,35 @@ const { messages, password } = require("../utils/message.js");
  * - passwordConfirm: must match password
  */
 exports.register_validation = {
-    body: Joi.object({
-        name: Joi.string().trim().required()
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            }),
-        email: Joi.string().trim().email({ tlds: { allow: false } }).required()
-            .messages({
-                "string.base": messages.string.base,
-                "string.email": "{{#label}} must be a valid email",
-                "any.required": messages.any.required
-            }),
-        password: Joi.string().required()
-            .custom(password, "Password Validation")
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            }),
-        passwordConfirm: Joi.any().valid(Joi.ref("password")).required()
-            .messages({
-                "any.only": "Password confirmation does not match password",
-                "any.required": messages.any.required
-            })
-    })
+  body: Joi.object({
+    name: Joi.string().trim().required().messages({
+      "string.base": messages.string.base,
+      "string.empty": messages.string.empty,
+      "any.required": messages.any.required,
+    }),
+    email: Joi.string()
+      .trim()
+      .email({ tlds: { allow: false } })
+      .required()
+      .messages({
+        "string.base": messages.string.base,
+        "string.email": "{{#label}} must be a valid email",
+        "any.required": messages.any.required,
+      }),
+    password: Joi.string()
+      .required()
+      .custom(password, "Password Validation")
+      .messages({
+        "string.base": messages.string.base,
+        "string.empty": messages.string.empty,
+        "any.required": messages.any.required,
+      }),
+    passwordConfirm: Joi.any().valid(Joi.ref("password")).required().messages({
+      "any.only": "Password confirmation does not match password",
+      "any.required": messages.any.required,
+    }),
+  }),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                            Login Joi Validation                            */
@@ -54,23 +55,26 @@ exports.register_validation = {
  * - password: validated with custom password rules
  */
 exports.login_validation = {
-    body: Joi.object({
-        email: Joi.string().trim().email({ tlds: { allow: false } }).required()
-            .messages({
-                "string.base": messages.string.base,
-                "string.email": "{{#label}} must be a valid email",
-                "any.required": messages.any.required
-            }),
-        password: Joi.string().required()
-            .custom(password, "Password Validation")
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            })
-    })
+  body: Joi.object({
+    email: Joi.string()
+      .trim()
+      .email({ tlds: { allow: false } })
+      .required()
+      .messages({
+        "string.base": messages.string.base,
+        "string.email": "{{#label}} must be a valid email",
+        "any.required": messages.any.required,
+      }),
+    password: Joi.string()
+      .required()
+      .custom(password, "Password Validation")
+      .messages({
+        "string.base": messages.string.base,
+        "string.empty": messages.string.empty,
+        "any.required": messages.any.required,
+      }),
+  }),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                         Forgot Password Validation                         */
@@ -81,16 +85,18 @@ exports.login_validation = {
  * - email: valid email format
  */
 exports.forgot_validation = {
-    body: Joi.object({
-        email: Joi.string().trim().email({ tlds: { allow: false } }).required()
-            .messages({
-                "string.base": messages.string.base,
-                "string.email": "{{#label}} must be a valid email",
-                "any.required": messages.any.required
-            })
-    })
+  body: Joi.object({
+    email: Joi.string()
+      .trim()
+      .email({ tlds: { allow: false } })
+      .required()
+      .messages({
+        "string.base": messages.string.base,
+        "string.email": "{{#label}} must be a valid email",
+        "any.required": messages.any.required,
+      }),
+  }),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                          Reset Password Validation                         */
@@ -101,16 +107,14 @@ exports.forgot_validation = {
  * - token: non-empty string
  */
 exports.reset_validation = {
-    query: Joi.object({
-        token: Joi.string().trim().required()
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            })
-    })
+  query: Joi.object({
+    token: Joi.string().trim().required().messages({
+      "string.base": messages.string.base,
+      "string.empty": messages.string.empty,
+      "any.required": messages.any.required,
+    }),
+  }),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                                  Update Me                                 */
@@ -122,22 +126,22 @@ exports.reset_validation = {
  * - email: valid email format
  */
 exports.updateMe_validation = {
-    body: Joi.object({
-        name: Joi.string().trim()
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            }),
-        email: Joi.string().trim().email({ tlds: { allow: false } })
-            .messages({
-                "string.base": messages.string.base,
-                "string.email": "{{#label}} must be a valid email",
-                "any.required": messages.any.required
-            })
-    })
+  body: Joi.object({
+    name: Joi.string().trim().messages({
+      "string.base": messages.string.base,
+      "string.empty": messages.string.empty,
+      "any.required": messages.any.required,
+    }),
+    email: Joi.string()
+      .trim()
+      .email({ tlds: { allow: false } })
+      .messages({
+        "string.base": messages.string.base,
+        "string.email": "{{#label}} must be a valid email",
+        "any.required": messages.any.required,
+      }),
+  }),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                               Update Password                              */
@@ -150,29 +154,32 @@ exports.updateMe_validation = {
  * - newpasswordConfirm: must match newPassword
  */
 exports.updatePassword_validation = {
-    body: Joi.object({
-        password: Joi.string().required()
-            .custom(password, "Password Validation")
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            }),
-        newPassword: Joi.string().required()
-            .custom(password, "Password Validation")
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            }),
-        newPasswordConfirm: Joi.any().valid(Joi.ref("newPassword")).required()
-            .messages({
-                "any.only": "Password confirmation does not match password",
-                "any.required": messages.any.required
-            })
-    })
+  body: Joi.object({
+    password: Joi.string()
+      .required()
+      .custom(password, "Password Validation")
+      .messages({
+        "string.base": messages.string.base,
+        "string.empty": messages.string.empty,
+        "any.required": messages.any.required,
+      }),
+    newPassword: Joi.string()
+      .required()
+      .custom(password, "Password Validation")
+      .messages({
+        "string.base": messages.string.base,
+        "string.empty": messages.string.empty,
+        "any.required": messages.any.required,
+      }),
+    newPasswordConfirm: Joi.any()
+      .valid(Joi.ref("newPassword"))
+      .required()
+      .messages({
+        "any.only": "Password confirmation does not match password",
+        "any.required": messages.any.required,
+      }),
+  }),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                            User list pagination                            */
@@ -185,27 +192,24 @@ exports.updatePassword_validation = {
  * - search: non-empty string
  */
 exports.userListPagination_validation = {
-    query: Joi.object({
-        page: Joi.number().integer().min(1).max(100).required()
-            .messages({
-                "number.base": messages.number.base,
-                "number.integer": messages.number.integer,
-                "number.min": messages.number.min,
-                "number.max": messages.number.max,
-                "any.required": messages.any.required
-            }),
-        limit: Joi.number().integer().min(1).max(100).required()
-            .messages({
-                "number.base": messages.number.base,
-                "number.integer": messages.number.integer,
-                "number.min": messages.number.min,
-                "number.max": messages.number.max,
-                "any.required": messages.any.required
-            }),
-        search: Joi.string().trim().optional().allow(null, "")
-    })
+  query: Joi.object({
+    page: Joi.number().integer().min(1).max(100).required().messages({
+      "number.base": messages.number.base,
+      "number.integer": messages.number.integer,
+      "number.min": messages.number.min,
+      "number.max": messages.number.max,
+      "any.required": messages.any.required,
+    }),
+    limit: Joi.number().integer().min(1).max(100).required().messages({
+      "number.base": messages.number.base,
+      "number.integer": messages.number.integer,
+      "number.min": messages.number.min,
+      "number.max": messages.number.max,
+      "any.required": messages.any.required,
+    }),
+    search: Joi.string().trim().optional().allow(null, ""),
+  }),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                               Get User By Id                               */
@@ -216,16 +220,14 @@ exports.userListPagination_validation = {
  * - _id: non-empty string
  */
 exports.userById_validation = {
-    query: Joi.object({
-        _id: Joi.string().trim().required()
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            })
-    })
+  query: Joi.object({
+    _id: Joi.string().trim().required().messages({
+      "string.base": messages.string.base,
+      "string.empty": messages.string.empty,
+      "any.required": messages.any.required,
+    }),
+  }),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                                 Update User                                */
@@ -237,21 +239,18 @@ exports.userById_validation = {
  * - active: boolean
  */
 exports.updateUser_validation = {
-    query: Joi.object({
-        _id: Joi.string().trim().required()
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            }),
-        active: Joi.boolean().required()
-            .messages({
-                "boolean.base": messages.boolean.base,
-                "any.required": messages.any.required,
-            })
-    })
+  query: Joi.object({
+    _id: Joi.string().trim().required().messages({
+      "string.base": messages.string.base,
+      "string.empty": messages.string.empty,
+      "any.required": messages.any.required,
+    }),
+    active: Joi.boolean().required().messages({
+      "boolean.base": messages.boolean.base,
+      "any.required": messages.any.required,
+    }),
+  }),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*                                 Delete User                                */
@@ -262,12 +261,11 @@ exports.updateUser_validation = {
  * - _id: non-empty string
  */
 exports.deleteUser_validation = {
-    query: Joi.object({
-        _id: Joi.string().trim().required()
-            .messages({
-                "string.base": messages.string.base,
-                "string.empty": messages.string.empty,
-                "any.required": messages.any.required
-            })
-    })
+  query: Joi.object({
+    _id: Joi.string().trim().required().messages({
+      "string.base": messages.string.base,
+      "string.empty": messages.string.empty,
+      "any.required": messages.any.required,
+    }),
+  }),
 };

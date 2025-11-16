@@ -18,7 +18,9 @@ router.get("/", (req, res, next) => {
     return swaggerUi.setup(swaggerDoc)(req, res, next);
   } catch (err) {
     console.warn("Swagger doc load failed:", err?.message);
-    return res.status(500).json({ success: false, message: "Failed to load API docs" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Failed to load API docs" });
   }
 });
 
