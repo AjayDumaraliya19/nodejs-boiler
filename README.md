@@ -1,4 +1,4 @@
-[![Node.js CI](https://github.com/yourusername/nodejs-boiler/actions/workflows/node.js.yml/badge.svg)](https://github.com/yourusername/nodejs-boiler/actions/workflows/node.js.yml)
+[![Node.js CI](https://github.com/yourusername/nodejs-boiler/actions/workflows/node.js.yml/badge.svg)](https://github.com/AjayDumaraliya19/nodejs-boiler/actions/workflows/node.js.yml)
 [![npm version](https://img.shields.io/npm/v/nodejs-boiler.svg)](https://www.npmjs.com/package/nodejs-boiler)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
