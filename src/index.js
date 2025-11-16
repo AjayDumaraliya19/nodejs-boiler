@@ -134,7 +134,7 @@ async function main() {
         const { projectType } = await inquirer.prompt([{
             type: "list",
             name: "projectType",
-            message: "Select a variant:",
+            message: "Select a database:",
             choices: [
                 { name: "mongodb", value: "mongodb" },
                 { name: "postgresql", value: "sql" }
@@ -174,21 +174,77 @@ async function main() {
         // Show success message
         spinner.succeed("✅ Project generated successfully!");
 
-        // Final Instructions
-        console.log(chalk.cyan.bold("\nNext Steps:"));
-        const nextSteps = [
-            `cd ${path.relative(process.cwd(), targetDir) || "."}`,
-            `npm install`,
-            `npm init:admin   # (optional) to create an admin user`,
-            `npm run dev`
-        ];
-        nextSteps.forEach((step, index) => console.log(chalk.cyan(`  ${index + 1}. ${step}`)));
+        // Display post-installation instructions
+        displayPostInstallInstructions(targetDir, projectType, projectName);
+        
         console.log(chalk.green("\nHappy coding! 🎉\n"));
     } catch (error) {
         console.error(chalk.red("\nError:"), error?.message || "");
         process.exit(1);
     }
-}
+};
+
+/* ----------------------- Post-Installation Instructions --------------------- */
+async function displayPostInstallInstructions(targetDir, projectType, projectName) {
+    const relativePath = path.relative(process.cwd(), targetDir) || ".";
+    const envFile = path.join(targetDir, ".env");
+    const packageJsonPath = path.join(targetDir, "package.json");
+    
+    console.log(chalk.cyan.bold("\n🚀 Project Setup Complete!"));
+    console.log(chalk.cyan("\n📋 Next Steps:"));
+    
+    // Common next steps
+    const commonSteps = [
+        `Navigate to project directory: ${chalk.yellow(`cd ${relativePath}`)}`,
+        `Install dependencies: ${chalk.yellow("npm install")}`,
+        `Copy ${chalk.yellow(".env.example")} to ${chalk.yellow(".env")} and update the values`,
+        `Start development server: ${chalk.yellow("npm run dev")}`
+    ];
+    
+    // Database specific steps
+    const dbSteps = {
+        mongodb: [
+            `Ensure MongoDB is running locally or update ${chalk.yellow("MONGODB_URI")} in .env`,
+            `(Optional) Create admin user: ${chalk.yellow("npm run init:admin")}`
+        ],
+        sql: [
+            `Set up your PostgreSQL database and update database connection in .env`
+        ]
+    };
+    
+    // Combine and display all steps
+    [...commonSteps, ...(dbSteps[projectType] || [])].forEach((step, index) => {
+        console.log(chalk.cyan(`  ${index + 1}. ${step}`));
+    });
+    
+    // Project structure highlights
+    console.log(chalk.cyan("\n📁 Important Files & Directories:"));
+    const importantFiles = [
+        `📄 .env - Environment variables (copy from .env.example)`,
+        `📄 package.json - Project dependencies and scripts`,
+        `📁 src/ - Application source code`,
+        `  ├── config/ - Configuration files`,
+        `  ├── controllers/ - Route controllers`,
+        `  ├── models/ - Database models`,
+        `  ├── routes/ - API route definitions`,
+        `  └── middleware/ - Express middleware`
+    ];
+    
+    importantFiles.forEach(file => console.log(`  ${file}`));
+    
+    // Development commands
+    console.log(chalk.cyan("\n🔧 Development Commands:"));
+    console.log(chalk.yellow(`  npm run dev`), "     Start development server with hot-reload");
+    
+    // API Documentation
+    console.log(chalk.cyan("\n📚 API Documentation:"));
+    console.log(`  After starting the server, visit: ${chalk.blue("http://localhost:8080/api/docs")}`);
+    
+    // Support
+    console.log(chalk.cyan("\n❓ Need Help?"));
+    console.log(`  Check the ${chalk.yellow("README.md")} for more detailed instructions`);
+    console.log(`  Open an issue at: ${chalk.blue("https://github.com/AjayDumaraliya19/nodejs-boiler/issues")}`);
+};
 
 /* ------------------------------- RUN the CLI ------------------------------ */
 main().catch(error => {

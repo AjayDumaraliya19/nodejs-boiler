@@ -1,0 +1,150 @@
+# ================================
+# Node.js / Express .gitignore
+# ================================
+
+# -----------------
+# Node dependencies
+# -----------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# -----------------
+# Environment files
+# -----------------
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# -----------------
+# Logs & diagnostics
+# -----------------
+logs
+*.log
+*.pid
+*.seed
+*.pid.lock
+pids
+coverage/
+.nyc_output/
+lerna-debug.log
+
+# -----------------
+# Build & dist outputs
+# -----------------
+dist/
+build/
+out/
+.tmp/
+.temp/
+.cache/
+.next/
+.nuxt/
+.svelte-kit/
+.snowpack/
+vite.config.ts.timestamp-*
+.storybook-out/
+.storybook-static/
+.ssr/
+
+# -----------------
+# OS / IDE / Editor files
+# -----------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# VSCode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+
+# JetBrains (WebStorm, IntelliJ, etc.)
+.idea/
+*.iml
+
+# -----------------
+# Testing
+# -----------------
+coverage/
+jest-html-reporters-*.html
+cypress/videos/
+cypress/screenshots/
+test-results/
+__tests__/temp/
+__mocks__/
+
+# -----------------
+# Uploads / Temp files
+# -----------------
+uploads/
+public/uploads/
+storage/
+tmp/
+*.tmp
+
+# -----------------
+# Local data / caches
+# -----------------
+*.bak
+*.swp
+*.swo
+*.orig
+.cache-loader/
+.husky/_/
+eslintcache
+
+# -----------------
+# System / Deployment
+# -----------------
+*.tgz
+*.tar.gz
+*.zip
+*.tar
+*.bak
+*.old
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+npm-shrinkwrap.json
+
+# -----------------
+# Docker
+# -----------------
+docker-compose.override.yml
+.dockerignore
+Dockerfile.dev
+Dockerfile.local
+docker-data/
+*.pid
+
+# -----------------
+# Git backups & misc
+# -----------------
+*.orig
+*.rej
+*.merge
+*.sw?
+.gitignore.local
+.gitlab-ci-local/
+
+# -----------------
+# Environment-specific secrets (keep out of git)
+# -----------------
+config/local.json
+config/secret.json
+keys/
+private/
+certs/
+ssl/
+firebase-service-account.json
+google-credentials.json
+aws-credentials.json
