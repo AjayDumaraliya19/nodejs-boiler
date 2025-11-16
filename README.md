@@ -88,7 +88,7 @@ Your application automatically connects to database on startup. The connection i
 1. Check the console for successful MongoDB connection message
 2. Check the Api working Visit `http://localhost:8080/`
 3. Visit `http://localhost:8080/health` for API health status
-4. Access Swagger docs at `http://localhost:8080/api-docs`
+4. Access Swagger docs at `http://localhost:8080/api/docs`
 
 
 ### Quick Start
