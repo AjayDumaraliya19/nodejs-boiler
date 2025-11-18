@@ -1,6 +1,6 @@
 {
   "name": "nodejs-boiler",
-  "version": "1.0.6",
+  "version": "1.0.1",
   "description": "🚀 A fast, modern, and production-ready Node.js project boilerplate generator CLI. Quickly scaffold a full-featured Express.js application with authentication, database setup, API structure, and best practices.",
   "type": "module",
   "main": "src/index.js",
@@ -96,5 +96,8 @@
   "devDependencies": {
     "prettier": "^3.0.0",
     "nodemon": "^3.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
